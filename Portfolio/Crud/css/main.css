@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+}
+
+table .edit-btn a {
+  color: blue;
+}
+
+table .delete-btn a {
+  color: red;
+}
+/*# sourceMappingURL=main.css.map */

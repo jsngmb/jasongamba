@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+body {
+  margin: 0;
+  font-family: 'Poppins' !important;
+}
+
+.bg {
+  background: #222 !important;
+  background-size: cover;
+  background-image: url("") !important;
+  opacity: 1;
+}
+
+.weather {
+  background: rgba(0, 0, 0, 0.623) !important;
+  border-radius: 5px;
+}
+
+.weather h1 {
+  font-size: 4em;
+}
+
+.weather h2 {
+  font-size: 3em;
+}
+
+@media (min-width: 600px) {
+  .weather h1 {
+    font-size: 6em;
+  }
+}
+
+@media (min-width: 768px) {
+  .weather h1 {
+    font-size: 8em;
+  }
+}
+/*# sourceMappingURL=main.css.map */
