@@ -278,6 +278,14 @@ footer {
     }
     
 }
+.messenger {
+    position: fixed;
+    right: 1em;
+    bottom: 2em;
+    .messenger-icon {
+        width: 4em;
+    }
+}
 @media (min-width: 768px) {
     main {
         margin-top: 5em;
