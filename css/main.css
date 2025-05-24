@@ -7,7 +7,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 1px;
+  width: 8px;
 }
 
 /* Track */
@@ -327,6 +327,14 @@ footer .container .social .fa, footer .container .social .fa-brands {
 footer .container .social .fa:hover, footer .container .social .fa-brands:hover {
   background: #303030;
   color: white;
+}
+.messenger {
+  position: fixed;
+  right: 1em;
+  bottom: 2em;
+}
+.messenger .messenger-icon {
+  width: 4em;
 }
 
 @media (min-width: 768px) {
