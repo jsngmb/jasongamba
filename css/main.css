@@ -336,7 +336,10 @@ footer .container .social .fa:hover, footer .container .social .fa-brands:hover 
 .messenger .messenger-icon {
   width: 4em;
 }
-
+/*maintenance page*/
+.img-fluid {
+    width: 25em;
+}
 @media (min-width: 768px) {
   main {
     margin-top: 5em;
