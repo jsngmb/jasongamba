@@ -374,12 +374,21 @@
                             </div>
                         </div>
 
-                        <form class="contact-form" method="get" action="maintenance.html">
+                        <form class="contact-form" id="contact-form" method="get" action="maintenance.html">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" placeholder="Your name" autocomplete="name" required>
+
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder="your@email.com">
+                            <input type="email" name="email" id="email" placeholder="your@email.com" autocomplete="email" required>
+
+                            <label for="subject">Subject</label>
+                            <input type="text" name="subject" id="subject" placeholder="Project inquiry" required>
 
                             <label for="message">Message</label>
-                            <textarea name="message" id="message" placeholder="Tell me a little about your project."></textarea>
+                            <textarea name="message" id="message" placeholder="Tell me a little about your project." required></textarea>
+
+                            <input type="hidden" name="time" id="form-time">
+                            <p class="form-status" id="form-status" aria-live="polite"></p>
 
                             <button class="btn btn-primary submit-btn" name="sendmail" type="submit">Send Message</button>
                         </form>
@@ -415,7 +424,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="https://kit.fontawesome.com/c2b020b549.js" crossorigin="anonymous"></script>
+    <script src="js/emailjs-config.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
