@@ -113,7 +113,12 @@ if (contactForm) {
         }
 
         if (!hasEmailConfig || typeof emailjs === 'undefined') {
-            setFormStatus('Add your EmailJS public key, service ID, and template ID in js/emailjs-config.js first.', true);
+            setFormStatus('Form is not ready yet. Please email me directly at jsngmb@gmail.com.', true);
+            return;
+        }
+
+        if (navigator.onLine === false) {
+            setFormStatus('You appear to be offline. Please reconnect or email me directly at jsngmb@gmail.com.', true);
             return;
         }
 
@@ -153,8 +158,8 @@ if (contactForm) {
             const errorDetail = errorParts.join(' - ');
             setFormStatus(
                 errorDetail
-                    ? `Message failed to send. ${errorDetail}`
-                    : 'Message failed to send. Check your EmailJS template or service settings.',
+                    ? `Message failed to send. ${errorDetail}. You can email me directly at jsngmb@gmail.com.`
+                    : 'Message failed to send. Please try again or email me directly at jsngmb@gmail.com.',
                 true
             );
         } finally {
