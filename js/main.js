@@ -1,17 +1,101 @@
+const root = document.documentElement;
 const body = document.body;
+const pageLoader = document.getElementById('page-loader');
 const nav = document.querySelector('.site-nav');
 const navLinks = [...document.querySelectorAll('.nav-link')];
 const revealItems = [...document.querySelectorAll('[data-reveal]')];
 const currentYear = document.getElementById('current-year');
 const mobileMenu = document.querySelector('.navbar-collapse');
-const bsCollapse = mobileMenu ? bootstrap.Collapse.getOrCreateInstance(mobileMenu, { toggle: false }) : null;
+const bootstrapCollapse = window.bootstrap?.Collapse;
+const bsCollapse = mobileMenu && bootstrapCollapse
+    ? bootstrapCollapse.getOrCreateInstance(mobileMenu, { toggle: false })
+    : null;
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
 const formTime = document.getElementById('form-time');
 const submitButton = contactForm?.querySelector('button[type="submit"]');
 const emailConfig = window.EMAILJS_CONFIG || {};
+const themeToggle = document.getElementById('theme-toggle');
+const themeLabel = document.querySelector('[data-theme-label]');
+const themeStorageKey = 'jasongamba-theme';
+let loaderHidden = false;
+
+const persistTheme = (theme) => {
+    try {
+        localStorage.setItem(themeStorageKey, theme);
+    } catch (error) {
+        console.warn('Unable to save theme preference.', error);
+    }
+};
+
+const updateThemeToggle = (theme) => {
+    if (!themeToggle) {
+        return;
+    }
+
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+    themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
+
+    if (themeLabel) {
+        themeLabel.textContent = theme === 'light' ? 'Light mode' : 'Dark mode';
+    }
+};
+
+const applyTheme = (theme, shouldPersist = true) => {
+    const normalizedTheme = theme === 'light' ? 'light' : 'dark';
+    root.setAttribute('data-theme', normalizedTheme);
+    root.style.colorScheme = normalizedTheme;
+    updateThemeToggle(normalizedTheme);
+
+    if (shouldPersist) {
+        persistTheme(normalizedTheme);
+    }
+};
+
+const hideLoader = () => {
+    if (loaderHidden) {
+        return;
+    }
+
+    loaderHidden = true;
+
+    if (!pageLoader) {
+        body.classList.remove('is-loading');
+        return;
+    }
+
+    pageLoader.classList.add('is-hidden');
+    body.classList.remove('is-loading');
+
+    window.setTimeout(() => {
+        pageLoader.setAttribute('hidden', '');
+    }, 500);
+};
 
 body.classList.add('reveal-ready');
+applyTheme(root.getAttribute('data-theme') || 'dark', false);
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    });
+}
+
+if (document.readyState === 'complete') {
+    window.setTimeout(hideLoader, 220);
+} else {
+    window.addEventListener('DOMContentLoaded', () => {
+        window.setTimeout(hideLoader, 320);
+    }, { once: true });
+
+    window.addEventListener('load', () => {
+        window.setTimeout(hideLoader, 220);
+    }, { once: true });
+}
+
+window.setTimeout(hideLoader, 2200);
 
 if (currentYear) {
     currentYear.textContent = new Date().getFullYear();
